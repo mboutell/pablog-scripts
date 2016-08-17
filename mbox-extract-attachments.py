@@ -18,9 +18,14 @@
 #
 
 # Notes (RFC 1341):
-# The use of a Content-Type of multipart in a body part within another multipart entity is explicitly allowed. In such cases, for obvious reasons, care must be taken to ensure that each nested multipart entity must use a different boundary delimiter. See Appendix C for an example of nested multipart entities. 
+# The use of a Content-Type of multipart in a body part within another multipart entity is explicitly allowed. 
+# In such cases, for obvious reasons, care must be taken to ensure that each nested multipart entity must use a different boundary delimiter. 
+# See Appendix C for an example of nested multipart entities. 
 # The use of the multipart Content-Type with only a single body part may be useful in certain contexts, and is explicitly permitted. 
-# The only mandatory parameter for the multipart Content-Type is the boundary parameter, which consists of 1 to 70 characters from a set of characters known to be very robust through email gateways, and NOT ending with white space. (If a boundary appears to end with white space, the white space must be presumed to have been added by a gateway, and should be deleted.) It is formally specified by the following BNF
+# The only mandatory parameter for the multipart Content-Type is the boundary parameter, which consists of 1 to 70 characters 
+# from a set of characters known to be very robust through email gateways, and NOT ending with white space. 
+# (If a boundary appears to end with white space, the white space must be presumed to have been added by a gateway, and should be deleted.) 
+# It is formally specified by the following BNF
 
 # Related RFCs: 2047, 2044, 1522
 
@@ -79,11 +84,13 @@ def extract_attachment(payload):
 		# what else? ...
 
 		print "Extracting %s (%d bytes)\n" %(filename, len(content))
+		base = filename[:-4]
+		print "Base", base
 
 		n = 1
 		orig_filename = filename
 		while os.path.exists(filename):
-			filename = orig_filename + "." + str(n)
+			filename = base + "." + str(n) + ".csv"
 			n = n+1
 
 		try:
